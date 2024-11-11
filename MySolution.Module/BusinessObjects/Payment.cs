@@ -1,9 +1,11 @@
 ﻿using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl.EF;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 [DefaultClassOptions]
+[DefaultProperty(nameof(Rate))]
 public class Payment : BaseObject
 {
     //Use this attribute to specify the display format pattern for the property value.

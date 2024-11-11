@@ -1,8 +1,93 @@
-﻿<?xml version="1.0" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Title="MySolution">
+  <BOModel>
+    <Class Name="MySolution.Module.BusinessObjects.DemoTask" ImageName="BO_Task">
+      <OwnMembers>
+        <Member Name="DueDate" DisplayFormat="D" />
+        <Member Name="PercentCompleted" DisplayFormat="{0:N0}%" />
+        <Member Name="StartDate" DisplayFormat="D" />
+      </OwnMembers>
+    </Class>
+    <Class Name="MySolution.Module.BusinessObjects.Department" ImageName="BO_Department" />
+    <Class Name="MySolution.Module.BusinessObjects.Employee" ImageName="BO_Employee" />
+    <Class Name="MySolution.Module.BusinessObjects.Position" ImageName="BO_Position" />
+  </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="Employee_ListView" Caption="Employees" Index="0" />
+          <Item Id="Department_ListView" Caption="Departments" Index="1" />
+          <Item Id="Position_ListView" Caption="Positions" Index="2" />
+          <Item Id="DemoTask_ListView" Caption="Tasks" Index="3" />
+          <Item Id="Note" ViewId="Note_ListView" Caption="Notes" Index="4" IsNewNode="True" />
+          <Item Id="Payment_ListView" Caption="Payments" Index="5" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
   <Options>
     <LayoutManagerOptions RequiredFieldMark="*" />
   </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="24.1.3.0" IsNewNode="True" />
+  </SchemaModules>
   <Views>
+    <ListView Id="DemoTask_ListView" AllowEdit="True" NewItemRowPosition="Top" />
+    <ListView Id="Department_ListView" MasterDetailMode="ListViewAndDetailView" />
+    <DetailView Id="Employee_DetailView">
+      <Items>
+        <PropertyEditor Id="Department.Office" PropertyName="Department.Office" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="35.714285714285715">
+            <LayoutGroup Id="Employee" RelativeSize="100">
+              <LayoutGroup Id="Employee_col1" RelativeSize="50">
+                <LayoutItem Id="FirstName" RelativeSize="17.391304347826086" />
+                <LayoutItem Id="LastName" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="MiddleName" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="Birthday" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="TitleOfCourtesy" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="FullName" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="DisplayName" RelativeSize="17.391304347826086" />
+              </LayoutGroup>
+              <LayoutGroup Id="Employee_col2" RelativeSize="50">
+                <LayoutItem Id="Email" RelativeSize="17.391304347826086" />
+                <LayoutItem Id="WebPageAddress" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="Department" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="Position" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="Address" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="Manager" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="Department.Office" ViewItem="Department.Office" Index="6" RelativeSize="17.391304347826086" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" RelativeSize="32.142857142857146">
+            <LayoutItem Id="Notes" RelativeSize="100" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="32.142857142857146">
+            <LayoutGroup Id="Phones" RelativeSize="100">
+              <LayoutItem Id="Phones" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="DemoTasks" RelativeSize="100">
+              <LayoutItem Id="DemoTasks" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Employee_ListView" Criteria="" IsGroupPanelVisible="True">
+      <Columns>
+        <ColumnInfo Id="Address" Index="9" />
+        <ColumnInfo Id="Department" SortOrder="Ascending" GroupIndex="0" Index="10" />
+        <ColumnInfo Id="Position" SortOrder="Ascending" GroupIndex="1" Index="11" />
+      </Columns>
+      <Filters CurrentFilterId="Developers">
+        <Filter Id="All Employees" IsNewNode="True" />
+        <Filter Id="Developers" Criteria="[Position.Title] = 'Developer'" IsNewNode="True" />
+        <Filter Id="Development Department Employees" Criteria="[Department.Title] = 'Development Department'" IsNewNode="True" />
+      </Filters>
+    </ListView>
   </Views>
 </Application>

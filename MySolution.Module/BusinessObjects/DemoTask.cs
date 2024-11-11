@@ -68,11 +68,27 @@ namespace MySolution.Module.BusinessObjects
             Priority = Priority.Normal;
         }
 
+        /* Use this attribute to display the Postpone button in the UI
+        and call the Postpone() method when a user clicks this button*/
+        [Action(ToolTip = "Postpone the task to the next day", Caption = "Postpone")]
+        // Shift the task's due date forward by one day
+        public void Postpone()
+        {
+            if (DueDate == DateTime.MinValue)
+            {
+                DueDate = DateTime.Now;
+            }
+            DueDate = DueDate + TimeSpan.FromDays(1);
+        }
+
     }
     public enum Priority
     {
+        [ImageName("State_Priority_Low")]
         Low = 0,
+        [ImageName("State_Priority_Normal")]
         Normal = 1,
+        [ImageName("State_Priority_High")]
         High = 2
     }
     public enum TaskStatus
@@ -88,4 +104,5 @@ namespace MySolution.Module.BusinessObjects
         [ImageName("State_Task_Completed")]
         Completed
     }
+
 }

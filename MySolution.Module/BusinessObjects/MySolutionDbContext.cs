@@ -40,6 +40,7 @@ public class MySolutionEFCoreDbContext : DbContext {
     public DbSet<Position> Positions { get; set; }
     public DbSet<Address> Address { get; set; }
     public DbSet<Payment> Payments { get; set; }
+    public DbSet<Note> Notes { get; set; }
     public MySolutionEFCoreDbContext(DbContextOptions<MySolutionEFCoreDbContext> options) : base(options) {
 	}
 	//public DbSet<ModuleInfo> ModulesInfo { get; set; }
