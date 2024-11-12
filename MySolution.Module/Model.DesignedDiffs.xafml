@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Title="MySolution">
+  <ActionDesign>
+    <Actions>
+      <Action Id="DemoTask.MarkCompleted" ValidationContexts="MarkCompleted" />
+    </Actions>
+  </ActionDesign>
   <BOModel>
     <Class Name="MySolution.Module.BusinessObjects.DemoTask" ImageName="BO_Task">
       <OwnMembers>
@@ -32,6 +37,11 @@
   <SchemaModules>
     <SchemaModule Name="SystemModule" Version="24.1.3.0" IsNewNode="True" />
   </SchemaModules>
+  <Validation>
+    <Rules>
+      <RuleCriteria Id="TaskStarted" TargetType="MySolution.Module.BusinessObjects.DemoTask" Criteria="Status != 'NotStarted'" TargetContextIDs="MarkCompleted" IsNewNode="True" />
+    </Rules>
+  </Validation>
   <Views>
     <ListView Id="DemoTask_ListView" AllowEdit="True" NewItemRowPosition="Top" />
     <ListView Id="Department_ListView" MasterDetailMode="ListViewAndDetailView" />

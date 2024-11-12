@@ -41,6 +41,11 @@ public class MySolutionEFCoreDbContext : DbContext {
     public DbSet<Address> Address { get; set; }
     public DbSet<Payment> Payments { get; set; }
     public DbSet<Note> Notes { get; set; }
+    public DbSet<Resume> Resumes { get; set; }
+    public DbSet<ReportDataV2> ReportData { get; set; }
+    public DbSet<PortfolioFileData> FileAttachments { get; set; }
+    public DbSet<ApplicationUser> Users { get; set; }
+    public DbSet<ApplicationUserLoginInfo> UserLoginInfos { get; set; }
     public MySolutionEFCoreDbContext(DbContextOptions<MySolutionEFCoreDbContext> options) : base(options) {
 	}
 	//public DbSet<ModuleInfo> ModulesInfo { get; set; }

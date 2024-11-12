@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MySolution.Module.BusinessObjects;
 
@@ -11,9 +12,11 @@ using MySolution.Module.BusinessObjects;
 namespace MySolution.Module.Migrations
 {
     [DbContext(typeof(MySolutionEFCoreDbContext))]
-    partial class MySolutionEFCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241112150620_AddUserRolesAndSecuritySystem")]
+    partial class AddUserRolesAndSecuritySystem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

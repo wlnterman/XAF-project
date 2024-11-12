@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MySolution.Module.BusinessObjects;
 
@@ -11,9 +12,11 @@ using MySolution.Module.BusinessObjects;
 namespace MySolution.Module.Migrations
 {
     [DbContext(typeof(MySolutionEFCoreDbContext))]
-    partial class MySolutionEFCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241112144300_AddReportsModule")]
+    partial class AddReportsModule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,210 +61,6 @@ namespace MySolution.Module.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("FileData");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyActionPermissionObject", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ActionId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("RoleID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("RoleID");
-
-                    b.ToTable("PermissionPolicyActionPermissionObject");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyMemberPermissionsObject", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Criteria")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Members")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ReadState")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("TypePermissionObjectID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("WriteState")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("TypePermissionObjectID");
-
-                    b.ToTable("PermissionPolicyMemberPermissionsObject");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyNavigationPermissionObject", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ItemPath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("NavigateState")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("RoleID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TargetTypeFullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("RoleID");
-
-                    b.ToTable("PermissionPolicyNavigationPermissionObject");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyObjectPermissionsObject", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Criteria")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DeleteState")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("NavigateState")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ReadState")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("TypePermissionObjectID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("WriteState")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("TypePermissionObjectID");
-
-                    b.ToTable("PermissionPolicyObjectPermissionsObject");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyRoleBase", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("CanEditModel")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(34)
-                        .HasColumnType("nvarchar(34)");
-
-                    b.Property<bool>("IsAdministrative")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsAllowPermissionPriority")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PermissionPolicy")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("PermissionPolicyRoleBase");
-
-                    b.HasDiscriminator().HasValue("PermissionPolicyRoleBase");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyTypePermissionObject", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("CreateState")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DeleteState")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("NavigateState")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ReadState")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("RoleID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TargetTypeFullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("WriteState")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("RoleID");
-
-                    b.ToTable("PermissionPolicyTypePermissionObject");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyUser", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("ChangePasswordOnFirstLogon")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("nvarchar(21)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("StoredPassword")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("PermissionPolicyUser");
-
-                    b.HasDiscriminator().HasValue("PermissionPolicyUser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.ReportDataV2", b =>
@@ -320,28 +119,6 @@ namespace MySolution.Module.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Address");
-                });
-
-            modelBuilder.Entity("MySolution.Module.BusinessObjects.ApplicationUserLoginInfo", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LoginProviderName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProviderUserKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserForeignKey")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("UserForeignKey");
-
-                    b.ToTable("PermissionPolicyUserLoginInfo");
                 });
 
             modelBuilder.Entity("MySolution.Module.BusinessObjects.DemoTask", b =>
@@ -573,35 +350,6 @@ namespace MySolution.Module.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("PermissionPolicyRolePermissionPolicyUser", b =>
-                {
-                    b.Property<Guid>("RolesID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UsersID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("RolesID", "UsersID");
-
-                    b.HasIndex("UsersID");
-
-                    b.ToTable("PermissionPolicyRolePermissionPolicyUser");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyRole", b =>
-                {
-                    b.HasBaseType("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyRoleBase");
-
-                    b.HasDiscriminator().HasValue("PermissionPolicyRole");
-                });
-
-            modelBuilder.Entity("MySolution.Module.BusinessObjects.ApplicationUser", b =>
-                {
-                    b.HasBaseType("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyUser");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
             modelBuilder.Entity("DemoTaskEmployee", b =>
                 {
                     b.HasOne("MySolution.Module.BusinessObjects.DemoTask", null)
@@ -615,67 +363,6 @@ namespace MySolution.Module.Migrations
                         .HasForeignKey("EmployeesID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyActionPermissionObject", b =>
-                {
-                    b.HasOne("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyRoleBase", "Role")
-                        .WithMany("ActionPermissions")
-                        .HasForeignKey("RoleID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyMemberPermissionsObject", b =>
-                {
-                    b.HasOne("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyTypePermissionObject", "TypePermissionObject")
-                        .WithMany("MemberPermissions")
-                        .HasForeignKey("TypePermissionObjectID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("TypePermissionObject");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyNavigationPermissionObject", b =>
-                {
-                    b.HasOne("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyRoleBase", "Role")
-                        .WithMany("NavigationPermissions")
-                        .HasForeignKey("RoleID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyObjectPermissionsObject", b =>
-                {
-                    b.HasOne("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyTypePermissionObject", "TypePermissionObject")
-                        .WithMany("ObjectPermissions")
-                        .HasForeignKey("TypePermissionObjectID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("TypePermissionObject");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyTypePermissionObject", b =>
-                {
-                    b.HasOne("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyRoleBase", "Role")
-                        .WithMany("TypePermissions")
-                        .HasForeignKey("RoleID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("MySolution.Module.BusinessObjects.ApplicationUserLoginInfo", b =>
-                {
-                    b.HasOne("MySolution.Module.BusinessObjects.ApplicationUser", "User")
-                        .WithMany("UserLogins")
-                        .HasForeignKey("UserForeignKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MySolution.Module.BusinessObjects.Employee", b =>
@@ -748,37 +435,6 @@ namespace MySolution.Module.Migrations
                     b.Navigation("File");
                 });
 
-            modelBuilder.Entity("PermissionPolicyRolePermissionPolicyUser", b =>
-                {
-                    b.HasOne("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyRole", null)
-                        .WithMany()
-                        .HasForeignKey("RolesID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyUser", null)
-                        .WithMany()
-                        .HasForeignKey("UsersID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyRoleBase", b =>
-                {
-                    b.Navigation("ActionPermissions");
-
-                    b.Navigation("NavigationPermissions");
-
-                    b.Navigation("TypePermissions");
-                });
-
-            modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyTypePermissionObject", b =>
-                {
-                    b.Navigation("MemberPermissions");
-
-                    b.Navigation("ObjectPermissions");
-                });
-
             modelBuilder.Entity("MySolution.Module.BusinessObjects.Department", b =>
                 {
                     b.Navigation("Employees");
@@ -794,11 +450,6 @@ namespace MySolution.Module.Migrations
             modelBuilder.Entity("MySolution.Module.BusinessObjects.Resume", b =>
                 {
                     b.Navigation("Portfolio");
-                });
-
-            modelBuilder.Entity("MySolution.Module.BusinessObjects.ApplicationUser", b =>
-                {
-                    b.Navigation("UserLogins");
                 });
 #pragma warning restore 612, 618
         }

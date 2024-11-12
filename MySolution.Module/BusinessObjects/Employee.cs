@@ -32,6 +32,7 @@ public class Employee : BaseObject
     //Use this attribute to exclude the property from database mapping.
     [NotMapped]
     public virtual TitleOfCourtesy TitleOfCourtesy { get; set; }
+    public virtual IList<Resume> Resumes { get; set; } = new ObservableCollection<Resume>();
 
     [SearchMemberOptions(SearchMemberMode.Exclude)]
     public String FullName

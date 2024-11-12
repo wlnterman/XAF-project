@@ -9,4 +9,9 @@
       </Item>
     </Items>
   </NavigationItems>
+  <Validation>
+    <Rules>
+      <RuleCriteria Id="TaskStarted" CustomMessageTemplate="Cannot set the task as completed because it has not started." />
+    </Rules>
+  </Validation>
 </Application>

@@ -2,10 +2,12 @@
 using DevExpress.ExpressApp.Blazor.ApplicationBuilder;
 using DevExpress.ExpressApp.Blazor.Services;
 using DevExpress.Persistent.Base;
+using DevExpress.Persistent.BaseImpl.EF.PermissionPolicy;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.EntityFrameworkCore;
 using MySolution.Blazor.Server.Services;
+using MySolution.Module.BusinessObjects;
 
 namespace MySolution.Blazor.Server;
 
@@ -32,8 +34,18 @@ public class Startup {
                     options.AllowValidationDetailsAccess = false;
                 })
                 .Add<MySolution.Module.MySolutionModule>()
-            	.Add<MySolutionBlazorModule>();
+            	.Add<MySolutionBlazorModule>()
+                .AddFileAttachments()
+                .AddReports(options =>
+                {
+                    options.EnableInplaceReports = true;
+                    options.ReportDataType = typeof(DevExpress.Persistent.BaseImpl.EF.ReportDataV2);
+                    options.ReportStoreMode = DevExpress.ExpressApp.ReportsV2.ReportStoreModes.XML;
+                });
             builder.ObjectSpaceProviders
+                .AddSecuredEFCore().WithDbContext<MySolution.Module.BusinessObjects.MySolutionEFCoreDbContext>((serviceProvider, options) => {
+                    // ...
+                })
                 .AddEFCore(options => options.PreFetchReferenceProperties())
                     .WithDbContext<MySolution.Module.BusinessObjects.MySolutionEFCoreDbContext>((serviceProvider, options) => {
                         // Uncomment this code to use an in-memory database. This database is recreated each time the server starts. With the in-memory database, you don't need to make a migration when the data model is changed.
@@ -56,7 +68,19 @@ public class Startup {
                         options.UseLazyLoadingProxies();
                     })
                 .AddNonPersistent();
+            builder.Security
+                 .UseIntegratedMode(options => {
+                     options.RoleType = typeof(PermissionPolicyRole);
+                     options.UserType = typeof(ApplicationUser);
+                     options.UserLoginInfoType = typeof(ApplicationUserLoginInfo);
+                     options.SupportNavigationPermissionsForTypes = false;
+                 })
+             .AddPasswordAuthentication(options => options.IsSupportChangePassword = true);
         });
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options => {
+                options.LoginPath = "/LoginPage";
+            });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +98,8 @@ public class Startup {
         app.UseStaticFiles();
         app.UseRouting();
         app.UseXaf();
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseEndpoints(endpoints => {
             endpoints.MapXafEndpoints();
             endpoints.MapBlazorHub();

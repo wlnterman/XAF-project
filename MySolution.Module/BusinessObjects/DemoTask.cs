@@ -4,9 +4,18 @@ using DevExpress.Persistent.BaseImpl.EF;
 using DevExpress.ExpressApp.DC;
 using System.Collections.ObjectModel;
 using DevExpress.XtraPrinting.Native;
+using DevExpress.ExpressApp.ConditionalAppearance;
 
 namespace MySolution.Module.BusinessObjects
 {
+    
+    [Appearance("FontColorOrange", AppearanceItemType = "ViewItem", TargetItems = "*",
+    Context = "ListView", Criteria = "Status=='InProgress'", FontColor = "Orange")]
+    [Appearance("FontColorRed", AppearanceItemType = "ViewItem", TargetItems = "*",
+    Context = "ListView", Criteria = "Status=='NotStarted'", FontColor = "Red")]
+    [Appearance("FontColorGreen", AppearanceItemType = "ViewItem", TargetItems = "*",
+    Context = "ListView", Criteria = "Status=='Completed'", FontColor = "Green")]
+
     [DefaultClassOptions]
     //Use this attribute to define the name of the objects of this type in the user interface.
     [ModelDefault("Caption", "Task")]
@@ -24,6 +33,8 @@ namespace MySolution.Module.BusinessObjects
         public virtual DateTime? StartDate { get; set; }
 
         public virtual int PercentCompleted { get; set; }
+        [Appearance("PriorityBackColorPink", AppearanceItemType = "ViewItem",
+        Context = "Any", Criteria = "Priority=2", BackColor = "255, 240, 240")]
 
         public virtual Priority Priority { get; set; }
 
