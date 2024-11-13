@@ -90,6 +90,9 @@ public class Updater : ModuleUpdater {
         commonUser.Roles.Add(defaultRole);
 
         ObjectSpace.CommitChanges(); //Uncomment this line to persist created object(s).
+
+
+       
     }
     public override void UpdateDatabaseBeforeUpdateSchema() {
         base.UpdateDatabaseBeforeUpdateSchema();

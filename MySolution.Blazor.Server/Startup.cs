@@ -43,17 +43,16 @@ public class Startup {
                     options.ReportStoreMode = DevExpress.ExpressApp.ReportsV2.ReportStoreModes.XML;
                 });
             builder.ObjectSpaceProviders
-                .AddSecuredEFCore().WithDbContext<MySolution.Module.BusinessObjects.MySolutionEFCoreDbContext>((serviceProvider, options) => {
-                    // ...
-                })
                 .AddEFCore(options => options.PreFetchReferenceProperties())
-                    .WithDbContext<MySolution.Module.BusinessObjects.MySolutionEFCoreDbContext>((serviceProvider, options) => {
+                    .WithDbContext<MySolution.Module.BusinessObjects.MySolutionEFCoreDbContext>((serviceProvider, options) =>
+                    {
                         // Uncomment this code to use an in-memory database. This database is recreated each time the server starts. With the in-memory database, you don't need to make a migration when the data model is changed.
                         // Do not use this code in production environment to avoid data loss.
                         // We recommend that you refer to the following help topic before you use an in-memory database: https://docs.microsoft.com/en-us/ef/core/testing/in-memory
                         //options.UseInMemoryDatabase("InMemory");
                         string connectionString = null;
-                        if(Configuration.GetConnectionString("ConnectionString") != null) {
+                        if (Configuration.GetConnectionString("ConnectionString") != null)
+                        {
                             connectionString = Configuration.GetConnectionString("ConnectionString");
                         }
 #if EASYTEST
@@ -68,19 +67,25 @@ public class Startup {
                         options.UseLazyLoadingProxies();
                     })
                 .AddNonPersistent();
-            builder.Security
-                 .UseIntegratedMode(options => {
-                     options.RoleType = typeof(PermissionPolicyRole);
-                     options.UserType = typeof(ApplicationUser);
-                     options.UserLoginInfoType = typeof(ApplicationUserLoginInfo);
-                     options.SupportNavigationPermissionsForTypes = false;
-                 })
-             .AddPasswordAuthentication(options => options.IsSupportChangePassword = true);
+            //builder.ObjectSpaceProviders
+            //     .AddSecuredEFCore().WithDbContext<MySolution.Module.BusinessObjects.MySolutionEFCoreDbContext>((serviceProvider, options) =>
+            //     {
+            //         // ...
+            //     })
+            //     .AddNonPersistent();
+            //builder.Security
+            //     .UseIntegratedMode(options => {
+            //         options.RoleType = typeof(PermissionPolicyRole);
+            //         options.UserType = typeof(ApplicationUser);
+            //         options.UserLoginInfoType = typeof(ApplicationUserLoginInfo);
+            //         options.SupportNavigationPermissionsForTypes = false;
+            //     })
+            // .AddPasswordAuthentication(options => options.IsSupportChangePassword = true);
         });
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options => {
-                options.LoginPath = "/LoginPage";
-            });
+        //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        //    .AddCookie(options => {
+        //        options.LoginPath = "/LoginPage";
+        //    });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
